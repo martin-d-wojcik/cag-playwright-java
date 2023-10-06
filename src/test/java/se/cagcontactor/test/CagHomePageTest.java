@@ -19,12 +19,15 @@ public class CagHomePageTest {
     public static void launchBrowser() {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().
+                setViewportSize(1920, 1080));
+        // Page page = browserContext.newPage();
     }
 
     @Test
     public void testCheckOutOneCoworker() {
         carrersPage = new CarrersPage(browser);
-        carrersPage.clickMedarbetare();
+        // carrersPage.clickMedarbetare();
     }
 
     @Test

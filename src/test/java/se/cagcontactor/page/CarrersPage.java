@@ -29,8 +29,7 @@ public class CarrersPage {
         // Instantiate locators
         ledigaJobbBtn = page.getByText("Lediga jobb");
         availableJobsSpan = page.getByText("Just nu söker vi");
-        coworkersLink = page.locator("#li :text-is('Medarbetare')");
-                // page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Medarbetare"));
+        coworkersLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Medarbetare"));
     }
 
     public void clíckLedigaJobb() {
