@@ -2,10 +2,11 @@ package se.cagcontactor.test;
 
 import com.microsoft.playwright.*;
 import org.junit.*;
-import se.cagcontactor.page.CarrersPage;
+import se.cagcontactor.page.CareerPage;
 import se.cagcontactor.page.HomePage;
+import se.cagcontactor.page.PeoplePage;
 
-public class CagHomePageTest {
+public class CagHomePageEdgeTest {
 
 
     static Playwright playwright;
@@ -13,21 +14,23 @@ public class CagHomePageTest {
 
     // Page objects
     HomePage homePage;
-    CarrersPage carrersPage;
+    CareerPage careerPage;
+    PeoplePage peoplePage;
 
     @BeforeClass
     public static void launchBrowser() {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().
-                setViewportSize(1920, 1080));
-        // Page page = browserContext.newPage();
     }
 
     @Test
     public void testCheckOutOneCoworker() {
-        carrersPage = new CarrersPage(browser);
-        // carrersPage.clickMedarbetare();
+        careerPage = new CareerPage(browser);
+        careerPage.clickMedarbetareInCareerMenu();
+
+        peoplePage = new PeoplePage(browser);
+        peoplePage.clickOneCoworker("David Caro");
+        peoplePage.jagRekryterarVisible();
     }
 
     @Test
@@ -37,7 +40,7 @@ public class CagHomePageTest {
         homePage.assertAdress();
         homePage.clickJobbaHar("Konsultbolaget med dig i fokus - CAG Contactor");
 
-        carrersPage = new CarrersPage(browser);
-        carrersPage.clíckLedigaJobb();
+        careerPage = new CareerPage(browser);
+        careerPage.clíckLedigaJobb();
     }
 }

@@ -5,10 +5,9 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public class CarrersPage {
+public class CareerPage {
 
     Page page;
     Browser browser;
@@ -18,18 +17,20 @@ public class CarrersPage {
     // Locators
     Locator ledigaJobbBtn;
     Locator availableJobsSpan;
-    Locator coworkersLink;
+    Locator careerMenuBtn;
+    Locator coworkerLink;
 
-    public CarrersPage(Browser browser) {
+    public CareerPage(Browser browser) {
         this.browser = browser;
-        browserContext = browser.newContext();
+        browserContext = browser.newContext(new Browser.NewContextOptions().
+                setViewportSize(1920, 1080));
         page = browserContext.newPage();
         page.navigate(url);
 
         // Instantiate locators
         ledigaJobbBtn = page.getByText("Lediga jobb");
         availableJobsSpan = page.getByText("Just nu söker vi");
-        coworkersLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Medarbetare"));
+        careerMenuBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Karriärmeny"));
     }
 
     public void clíckLedigaJobb() {
@@ -38,8 +39,13 @@ public class CarrersPage {
         assertThat(availableJobsSpan).isVisible();
     }
 
-    public void clickMedarbetare() {
-        coworkersLink.focus();
-        coworkersLink.click();
+    public void clickMedarbetareInCareerMenu() {
+        // Expand Karriärmeny
+        careerMenuBtn.click();
+
+        // Click Medarbetare
+        coworkerLink = page.getByRole(AriaRole.NAVIGATION).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Medarbetare"));
+        coworkerLink.focus();
+        coworkerLink.click();
     }
 }
