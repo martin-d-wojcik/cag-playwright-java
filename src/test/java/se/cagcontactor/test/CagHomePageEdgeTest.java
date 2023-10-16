@@ -52,7 +52,8 @@ public class CagHomePageEdgeTest {
         careerPage.clickConnect();
 
         connectPage = new ConnectPage(browser);
-        // TODO: specify locator 
-        connectPage.selectFieldOfInterest("Alla");
+        connectPage.selectFieldOfInterest("Java & Frontend");
+        connectPage.clickFortsattButton();
+        connectPage.enterEmail("martin.wojcik@cag.se");
     }
 }
