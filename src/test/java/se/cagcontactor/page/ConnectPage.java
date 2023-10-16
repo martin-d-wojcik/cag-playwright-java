@@ -39,7 +39,5 @@ public class ConnectPage {
 
     public void enterEmail(String email) {
         page.getByRole(AriaRole.TEXTBOX).fill(email);
-
-        String dummy = "tadaaa";
     }
 }
