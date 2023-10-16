@@ -19,6 +19,7 @@ public class CareerPage {
     Locator availableJobsSpan;
     Locator careerMenuBtn;
     Locator coworkerLink;
+    Locator connectLink;
 
     public CareerPage(Browser browser) {
         this.browser = browser;
@@ -31,6 +32,8 @@ public class CareerPage {
         ledigaJobbBtn = page.getByText("Lediga jobb");
         availableJobsSpan = page.getByText("Just nu söker vi");
         careerMenuBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Karriärmeny"));
+        connectLink = page.locator("#section-25084344").
+                getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Connect"));
     }
 
     public void clíckLedigaJobb() {
@@ -47,5 +50,10 @@ public class CareerPage {
         coworkerLink = page.getByRole(AriaRole.NAVIGATION).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Medarbetare"));
         coworkerLink.focus();
         coworkerLink.click();
+    }
+
+    public void clickConnect() {
+        connectLink.focus();
+        connectLink.click();
     }
 }

@@ -3,6 +3,7 @@ package se.cagcontactor.test;
 import com.microsoft.playwright.*;
 import org.junit.*;
 import se.cagcontactor.page.CareerPage;
+import se.cagcontactor.page.ConnectPage;
 import se.cagcontactor.page.HomePage;
 import se.cagcontactor.page.PeoplePage;
 
@@ -16,6 +17,7 @@ public class CagHomePageEdgeTest {
     HomePage homePage;
     CareerPage careerPage;
     PeoplePage peoplePage;
+    ConnectPage connectPage;
 
     @BeforeClass
     public static void launchBrowser() {
@@ -24,7 +26,7 @@ public class CagHomePageEdgeTest {
     }
 
     @Test
-    public void testCheckOutOneCoworker() {
+    public void testCheckOutOneCoworkerShouldSeeHeadline() {
         careerPage = new CareerPage(browser);
         careerPage.clickMedarbetareInCareerMenu();
 
@@ -34,7 +36,7 @@ public class CagHomePageEdgeTest {
     }
 
     @Test
-    public void testSeeAvaibleJobs() {
+    public void testSeeAvaibleJobsShouldSeeList() {
         homePage = new HomePage(browser);
         homePage.assertTitlePage("CAG Contactor – CAG");
         homePage.assertAdress();
@@ -42,5 +44,15 @@ public class CagHomePageEdgeTest {
 
         careerPage = new CareerPage(browser);
         careerPage.clíckLedigaJobb();
+    }
+
+    @Test
+    public void testConnectWithUsEnterEmailOk() {
+        careerPage = new CareerPage(browser);
+        careerPage.clickConnect();
+
+        connectPage = new ConnectPage(browser);
+        // TODO: specify locator 
+        connectPage.selectFieldOfInterest("Alla");
     }
 }
