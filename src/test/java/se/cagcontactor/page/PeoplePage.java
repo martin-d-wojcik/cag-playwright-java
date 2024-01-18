@@ -4,6 +4,8 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import se.cagcontactor.util.BrowserHelper;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class PeoplePage {
@@ -17,9 +19,8 @@ public class PeoplePage {
     Locator coworker;
 
     public PeoplePage(Browser browser) {
-        this.browser = browser;
-        browserContext = browser.newContext();
-        page = browserContext.newPage();
+        // Go to the carreers people url
+        page = BrowserHelper.setUpBrowserContext(browser);
         page.navigate(url);
     }
 

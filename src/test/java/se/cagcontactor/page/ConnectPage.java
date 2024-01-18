@@ -5,6 +5,7 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import se.cagcontactor.util.BrowserHelper;
 
 import java.util.Locale;
 
@@ -19,9 +20,8 @@ public class ConnectPage {
     Locator fortsattBtn;
 
     public ConnectPage(Browser browser) {
-        this.browser = browser;
-        browserContext = browser.newContext();
-        page = browserContext.newPage();
+        // Go to the carreers connect url
+        page = BrowserHelper.setUpBrowserContext(browser);
         page.navigate(url);
 
         fortsattBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Fortsätt"));

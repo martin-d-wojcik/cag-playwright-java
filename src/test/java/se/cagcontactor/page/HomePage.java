@@ -5,6 +5,7 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.Assert;
+import se.cagcontactor.util.BrowserHelper;
 
 import java.util.List;
 
@@ -20,9 +21,7 @@ public class HomePage {
     Locator jobbaHar;
 
     public HomePage(Browser browser) {
-        this.browser = browser;
-        browserContext = browser.newContext();
-        page = browserContext.newPage();
+        page = BrowserHelper.setUpBrowserContext(browser);
         page.navigate(url);
 
         // Instantiate locators

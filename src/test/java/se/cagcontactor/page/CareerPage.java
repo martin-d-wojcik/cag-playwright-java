@@ -5,6 +5,8 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import se.cagcontactor.util.BrowserHelper;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class CareerPage {
@@ -22,10 +24,8 @@ public class CareerPage {
     Locator connectLink;
 
     public CareerPage(Browser browser) {
-        this.browser = browser;
-        browserContext = browser.newContext(new Browser.NewContextOptions().
-                setViewportSize(1920, 1080));
-        page = browserContext.newPage();
+        // Go to the carreers url
+        page = BrowserHelper.setUpBrowserContext(browser);
         page.navigate(url);
 
         // Instantiate locators
